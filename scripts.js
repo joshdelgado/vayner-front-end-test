@@ -58,11 +58,11 @@ $(function() {
             $('#'+id).removeClass('selected');
 			$('#'+id).find('input').prop('checked', false);
 
-            let album_id = id.substring( id.indexOf("__")+2 ),
-                album_title = $('#'+id+" div.album-title").html(),
-                target_user = el.id.substr(-1);
-            //console.log(el);
-            //console.log(target_user);
+            let album_id = id.substring( id.indexOf('__')+2 ),
+                album_title = $('#'+id+' div.album-title').html(),
+                target_user = el.id.substr(4);
+            //console.log(el.id);
+            console.log(target_user);
             //console.log(index+": "+id);
 
             $.ajax({
