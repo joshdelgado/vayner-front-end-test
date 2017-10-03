@@ -1,5 +1,8 @@
 $(function() {
-	console.log('ready!');
+	//console.log('ready!');
+	const root = 'https://jsonplaceholder.typicode.com/';
+	let all_albums,
+		user_data;
 
     /**
      * Define areas where dropping is allowed
@@ -126,7 +129,7 @@ $(function() {
 				console.log("success");
                 all_albums = result;
                 for (var i = 1; i <= 10; i++) {
-                    $('main').append('<div class="usercard"><h2 class="usercard__user"> '+user_data[i-1].name+'</h2><!--<button class="usercard__button" type="button" data-user="1">+</button>--><div class="search alt"><div class="search__input-wrap"><input class="search__input" placeholder="Search" type="text" required></input><label class="search__label">Search</label></div><button class="search__button" type="submit" data-user="'+i+'">	&rarr;</button></div><div class="table nodrag" id="user'+i+'" ondrop="drop(event, this)" ondragover="allowDrop(event)">');
+                    $('main').append('<div class="usercard"><h2 class="usercard__user"> '+user_data[i-1].name+'</h2><div class="search alt"><div class="search__input-wrap"><input class="search__input" placeholder="Search" type="text" required></input><label class="search__label">Search</label></div><button class="search__button" type="submit" data-user="'+i+'">&rarr;</button></div><div class="table nodrag" id="user'+i+'" ondrop="drop(event, this)" ondragover="allowDrop(event)">');
                     display_albums(i);
                 }
 			},
@@ -223,10 +226,6 @@ $(function() {
 		$(this).toggleClass('closed');
 		$(this).parent('.usercard').toggleClass('hidden');
 	})
-
-	const root = 'https://jsonplaceholder.typicode.com/';
-	let all_albums,
-		user_data;
 
 	init();
 });
