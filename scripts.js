@@ -3,6 +3,13 @@ $(function() {
 	let all_albums,
 		user_data;
 
+	/**
+	 * Initializing function
+	 */
+	init = function(){
+		get_users();
+	}
+
     /**
      * Define areas where dropping is allowed
      */
@@ -15,17 +22,13 @@ $(function() {
      */
     window.drag = function(ev) {
         let ids = [],
-			//titles = [];
             parent = $('#'+ev.target.id).parent().attr('id');
 
         if( $('#'+ev.target.id).find('input').prop('checked') == false ){
             $('#'+ev.target.id).find('input').prop('checked', true);
         }
 
-		console.log('select');
-        console.log( parent );
         $('#'+ev.target.id).parent().find('input[type=checkbox]:checked').each(function(index, value){
-			console.log($(this));
             ids.push( $(this).parents('.table__row').attr('id') );
         });
 
@@ -55,7 +58,6 @@ $(function() {
             let album_id = id.substring( id.indexOf('__')+2 ),
                 album_title = $('#'+id+' div.album-title').html(),
                 target_user = el.id.substr(4);
-            console.log(target_user);
 
             $.ajax({
     			url: root+"albums/"+album_id,
@@ -66,8 +68,6 @@ $(function() {
                     title: album_title
                 },
     			success: function(result){
-                    console.log("success");
-                    console.log(result);
                     document.getElementById("user"+result.userId).appendChild( document.getElementById(id) );
                 },
                 error: function( jqXhr, textStatus, errorThrown ){
@@ -77,13 +77,6 @@ $(function() {
         });
     }
 
-    /**
-     * Initializing function
-     */
-	init = function(){
-		get_users();
-	}
-
 	/**
      * Requests all user data and store in variable
      */
@@ -92,9 +85,7 @@ $(function() {
 			url: root+'users',
 			type: 'GET',
 			success: function(result){
-				console.log("success");
 				user_data = result;
-				console.log(user_data);
 			},
 			error: function( jqXhr, textStatus, errorThrown ){
 				console.log(errorThrown);
@@ -113,7 +104,6 @@ $(function() {
 			url: root+'albums',
 			type: 'GET',
 			success: function(result){
-				console.log("success");
                 all_albums = result;
                 for (var i = 1; i <= 10; i++) {
                     $('main').append('<div class="usercard"><h2 class="usercard__user"> '+user_data[i-1].name+'</h2><div class="search alt"><div class="search__input-wrap"><input class="search__input" placeholder="Search" type="text" required></input><label class="search__label">Search</label></div><button class="search__button" type="submit" data-user="'+i+'">&rarr;</button></div><div class="table nodrag" id="user'+i+'" ondrop="drop(event, this)" ondragover="allowDrop(event)">');
@@ -138,7 +128,6 @@ $(function() {
         }
         $('#user'+user).empty();
         $('#user'+user).append("<div class='table__overlay'><span>Drop Here</span></div><div class='table__row table__header flex'><div class='table__cell table__cell--short'>Id</div><div class='table__cell'>Title</div><div class='table__cell--inherit'><input class='table__selectall' type='checkbox' data-user='user"+user+"'></div></div>");
-        console.log(albums);
         for (let i = 0; i < albums.length; i++) {
             $('#user'+user).append("<div id='album__"+albums[i].id+"' class='table__row' draggable='true' ondragstart='drag(event)'><div class='table__cell table__cell--short'>"+albums[i].id+"</div><div class='table__cell table__cell album-title'>"+albums[i].title+"</div><div class='table__cell table__cell--inherit'><input class='table__checkbox' type='checkbox'></div></div>");
         }
@@ -150,11 +139,6 @@ $(function() {
 	 * @param {Number} user
      */
     search_albums = function(string, user){
-        /*let filtered_albums = all_albums.filter(
-            cell => cell.title.includes(string) == true && cell.userId == user
-        );
-        display_albums(user, filtered_albums)*/
-		//console.log(user);
 		$('#user'+user+" .table__row:not('.table__header')").each(function(){
 			let title = $(this).children('.album-title').html();
 			$(this).removeClass('hidden');
@@ -163,7 +147,6 @@ $(function() {
 				$(this).addClass('hidden');
 			}
 		});
-        //console.log(filtered_albums);
     }
 
 	/**
@@ -173,7 +156,6 @@ $(function() {
         ev.preventDefault;
         let string = $(this).parent('.search').find('.search__input').val(),
             user = $(this).attr('data-user');
-        console.log(string+" "+user);
         search_albums(string, user);
     });
 
