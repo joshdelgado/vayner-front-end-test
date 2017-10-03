@@ -209,8 +209,10 @@ $(function() {
 		$('#'+user).find('input').prop('checked', checked);
 		if( checked == true ){
 			$('#'+user).find('.table__row').addClass('selected');
+			$('#'+user).find('input').prop('checked', true);
 		} else {
 			$('#'+user).find('.table__row').removeClass('selected');
+			$('#'+user).find('input').prop('checked', false);
 		}
 	});
 
@@ -221,11 +223,6 @@ $(function() {
 			$(this).removeClass('active');
 		}
 	});
-
-	$(document).on('click', '.usercard__button', function(){
-		$(this).toggleClass('closed');
-		$(this).parent('.usercard').toggleClass('hidden');
-	})
 
 	init();
 });

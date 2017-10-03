@@ -380,6 +380,9 @@ footer p{
 .table__cell:last-child {
     margin-right: 0px;
 }
+.table__checkbox{
+    opacity:0;
+}
 .album-title{
     white-space: nowrap;
     overflow: hidden;
