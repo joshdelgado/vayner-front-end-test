@@ -267,6 +267,7 @@ footer p{
 .table {
     width:100%;
     position: relative;
+    overflow:hidden;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
@@ -277,7 +278,7 @@ footer p{
     left: 0;
     height: 100%;
     width: 100%;
-    min-height: 30rem;
+    min-height: 20rem;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -302,6 +303,7 @@ footer p{
 .table__row.table__header {
     background-color: #6092c8;
     color: #fafafa;
+    height:3rem;
 }
 .table__header:hover{
     -webkit-box-shadow: none !important;
@@ -317,7 +319,7 @@ footer p{
         -ms-flex-align: center;
             align-items: center;
     padding: 0.5rem 1rem;
-    height: 3rem;
+    height: 2rem;
     border: 1px solid rgba(96, 146, 200, 0);
     border-radius: 2px;
     margin-bottom: 6px;
