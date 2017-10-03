@@ -75,7 +75,17 @@ $(function() {
                 }
             });
         });
+
+		reset_checkboxes();
     }
+
+	/**
+	 * Reset checkboxes
+	 */
+	reset_checkboxes = function(){
+		$('.table__selectall').prop('checked', false);
+		$('.table__row').removeClass('hidden');
+	}
 
 	/**
      * Requests all user data and store in variable
