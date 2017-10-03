@@ -298,7 +298,7 @@ footer p{
 .table.draghere .table__overlay{
     z-index: 9;
 }
-.table__header {
+.table__row.table__header {
     background-color: #6092c8;
     color: #fafafa;
 }
@@ -317,16 +317,22 @@ footer p{
             align-items: center;
     padding: 0.5rem 1rem;
     height: 3rem;
-    /*border-left: 4px solid rgba(96, 146, 200, 0);*/
     border: 1px solid rgba(96, 146, 200, 0);
     border-radius: 2px;
     margin-bottom: 6px;
+    background-color: #f5f5f5;
     cursor: move;
     -webkit-transition: all 0.25s ease;
     transition: all 0.25s ease;
 }
-.table__row:nth-child(odd){
-    background-color: #eee;
+.table__row.hidden{
+    height: 0px;
+    padding:0;
+    margin:0;
+    opacity:0;
+}
+.table__row:nth-child(odd):not(.hidden){
+    background-color: #ECEFF1;
 }
 .table__row:last-child {
     border-bottom: 0

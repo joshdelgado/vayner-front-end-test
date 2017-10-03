@@ -162,10 +162,19 @@ $(function() {
 	 * @param {Number} user
      */
     search_albums = function(string, user){
-        let filtered_albums = all_albums.filter(
+        /*let filtered_albums = all_albums.filter(
             cell => cell.title.includes(string) == true && cell.userId == user
         );
-        display_albums(user, filtered_albums)
+        display_albums(user, filtered_albums)*/
+		//console.log(user);
+		$('#user'+user+" .table__row:not('.table__header')").each(function(){
+			let title = $(this).children('.album-title').html();
+			$(this).removeClass('hidden');
+			if( !title.includes(string) ){
+				console.log( title );
+				$(this).addClass('hidden');
+			}
+		});
         //console.log(filtered_albums);
     }
 
