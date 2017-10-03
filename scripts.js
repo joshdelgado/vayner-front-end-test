@@ -1,5 +1,4 @@
 $(function() {
-	//console.log('ready!');
 	const root = 'https://jsonplaceholder.typicode.com/';
 	let all_albums,
 		user_data;
@@ -28,17 +27,12 @@ $(function() {
         $('#'+ev.target.id).parent().find('input[type=checkbox]:checked').each(function(index, value){
 			console.log($(this));
             ids.push( $(this).parents('.table__row').attr('id') );
-			//titles.push( $(this).parent().children('.album-title').html() );
         });
 
 		ids = ids.filter( Boolean );
-		//titles = titles.filter( Boolean );
 
         ev.dataTransfer.setData('id', ids);
 		ev.dataTransfer.setData('origin', parent);
-        //ev.dataTransfer.setData('title', titles);
-        //console.log(ids);
-        //console.log( parent );
         $('.table:not(#'+parent+')').addClass('draghere');
     }
 
@@ -49,24 +43,19 @@ $(function() {
         ev.preventDefault();
         let ids = ev.dataTransfer.getData('id').split(','),
 			origin = ev.dataTransfer.getData('origin');
-        //console.log(ids);
         $('.table').removeClass('draghere');
 		if( origin == el.id ){
-			//console.log("same!!!!");
 			return;
 		}
 
         ids.forEach(function(id, index){
-            //console.log(id);
             $('#'+id).removeClass('selected');
 			$('#'+id).find('input').prop('checked', false);
 
             let album_id = id.substring( id.indexOf('__')+2 ),
                 album_title = $('#'+id+' div.album-title').html(),
                 target_user = el.id.substr(4);
-            //console.log(el.id);
             console.log(target_user);
-            //console.log(index+": "+id);
 
             $.ajax({
     			url: root+"albums/"+album_id,
@@ -86,8 +75,6 @@ $(function() {
                 }
             });
         });
-        //$('.table__row').removeClass('selected');
-        //$(this).children('input').prop('checked', false);
     }
 
     /**
@@ -148,13 +135,11 @@ $(function() {
         albums = all_albums.filter(cell => cell.userId == user);
         if( filtered_albums ){
             albums = filtered_albums;
-            //console.log(falbums);
         }
         $('#user'+user).empty();
         $('#user'+user).append("<div class='table__overlay'><span>Drop Here</span></div><div class='table__row table__header flex'><div class='table__cell table__cell--short'>Id</div><div class='table__cell'>Title</div><div class='table__cell--inherit'><input class='table__selectall' type='checkbox' data-user='user"+user+"'></div></div>");
         console.log(albums);
         for (let i = 0; i < albums.length; i++) {
-            //console.log(albums[i].id+" "+albums[i].title);
             $('#user'+user).append("<div id='album__"+albums[i].id+"' class='table__row' draggable='true' ondragstart='drag(event)'><div class='table__cell table__cell--short'>"+albums[i].id+"</div><div class='table__cell table__cell album-title'>"+albums[i].title+"</div><div class='table__cell table__cell--inherit'><input class='table__checkbox' type='checkbox'></div></div>");
         }
     }
@@ -205,7 +190,6 @@ $(function() {
 		let user = $(this).attr('data-user'),
 			checked = $(this).prop('checked');
 
-		//console.log(user+" "+checked);
 		$('#'+user).find('input').prop('checked', checked);
 		if( checked == true ){
 			$('#'+user).find('.table__row').addClass('selected');
