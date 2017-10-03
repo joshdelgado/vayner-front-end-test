@@ -277,6 +277,7 @@ footer p{
     left: 0;
     height: 100%;
     width: 100%;
+    min-height: 30rem;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
