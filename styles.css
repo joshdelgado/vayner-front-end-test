@@ -226,10 +226,13 @@ footer p{
 
 /* Search Alt */
 
+.search.alt{
+    padding:1rem 0;
+}
 .search.alt .search__input{
     position: relative;
     z-index: 2;
-    margin: 0 0 0.5em;
+    margin: 0 0 2px;
     padding: 1rem;
     width:200px;
     font-size: 0.75rem;
