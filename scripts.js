@@ -150,7 +150,7 @@ $(function() {
     }
 
 	/**
-     * Event Listeners
+     * Event Listener - Search Albums
      */
     $(document).on('click', '.search__button', function(ev){
         ev.preventDefault;
@@ -159,6 +159,9 @@ $(function() {
         search_albums(string, user);
     });
 
+	/**
+	 * Event Listener - Select albums
+	 */
     $(document).on('mousedown', '.table__row:not(.table__header)', function(){
         $(this).toggleClass('selected');
         if( $(this).find('input').prop('checked') == false ){
@@ -168,26 +171,23 @@ $(function() {
         }
     });
 
+	/**
+	 * Event Listener - Select/Deselect all albums
+	 */
 	$(document).on('change', '.table__selectall', function(){
 		let user = $(this).attr('data-user'),
 			checked = $(this).prop('checked');
 
-		$('#'+user).find('input').prop('checked', checked);
-		if( checked == true ){
-			$('#'+user).find('.table__row').addClass('selected');
-			$('#'+user).find('input').prop('checked', true);
-		} else {
-			$('#'+user).find('.table__row').removeClass('selected');
-			$('#'+user).find('input').prop('checked', false);
-		}
-	});
-
-	$(document).on('focusin', '.search__input', function(){
-		$(this).addClass('active');
-	}).on('focusout', '.search__input', function(){
-		if( !$(this).val() ){
-			$(this).removeClass('active');
-		}
+		$('#'+user).find('.table__row').each(function(){
+			console.log( $(this).hasClass('hidden') );
+			if( checked == true && !$(this).hasClass('hidden') ){
+				$(this).addClass('selected');
+				$(this).find('input').prop('checked', true);
+			} else {
+				$(this).removeClass('selected');
+				$(this).find('input').prop('checked', false);
+			}
+		});
 	});
 
 	init();
